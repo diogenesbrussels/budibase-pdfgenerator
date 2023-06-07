@@ -81,6 +81,7 @@ export default {
   input: "index.js",
   output: {
     sourcemap: process.env.ROLLUP_WATCH ? "inline" : false,
+    inlineDynamicImports: true,
     format: "iife",
     file: "dist/plugin.min.js",
     name: "plugin",

@@ -6,11 +6,12 @@
     "friendlyName": "PDF Generator",
     "description": "Generate a PDF file from HTML template",
     "icon": "Text",
+    "hasChildren": true,
     "settings": [
       {
         "type": "text",
-        "key": "text",
-        "label": "Text"
+        "key": "buttonText",
+        "label": "Button text"
       }
     ]
   }

@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@crownframework/svelte-error-boundary": "^1.0.3",
+    "html-to-image": "^1.11.11",
+    "jspdf": "^2.5.1",
     "svelte": "^3.49.0"
   },
   "devDependencies": {
