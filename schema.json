@@ -3,7 +3,7 @@
   "metadata": {},
   "schema": {
     "name": "budibase-pdfgenerator",
-    "friendlyName": "budibase-pdfgenerator",
+    "friendlyName": "PDF Generator",
     "description": "Generate a PDF file from HTML template",
     "icon": "Text",
     "settings": [
