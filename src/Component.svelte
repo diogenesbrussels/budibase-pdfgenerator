@@ -2,6 +2,7 @@
   import { getContext } from "svelte";
   import { jsPDF } from "jspdf";
   import { toPng } from "html-to-image";
+  import html2PDF from 'jspdf-html2canvas';
 
   export let buttonText;
 
@@ -10,53 +11,79 @@
   const { styleable } = getContext("sdk");
   const component = getContext("component");
 
-  function createPDF() {
-    const doc = new jsPDF();
+  async function createPDF() {
 
-    toPng(PDFContent).then((dataUrl) => {
-      const img = new Image({ orientation: "p", unit: "mm", format: "a4" });
-      img.src = dataUrl;
+    html2PDF(PDFContent, {
+    jsPDF: {
+      format: 'a4',
+      useCORS: true,
+    },
+    imageType: 'image/jpeg',
+    output: './pdf/generate.pdf'
+  });
+    // const doc = new jsPDF({ orientation: "p", unit: "mm", format: "a4" });
 
-      img.onload = () => {
-        doc.internal.scaleFactor = 1;
+    // domtoimage
+    //   .toPng(PDFContent)
+    //   .then(function (dataUrl) {
+    //     var img = new Image();
+    //     img.src = dataUrl;
+    //     img.onload = () => {
+    //       const imgProps = doc.getImageProperties(img);
+    //       doc.addImage(img, "PNG", 0, 0, doc.internal.pageSize.getWidth(), doc.internal.pageSize.getHeight());
+    //       doc.save("file.pdf");
+    //     };
 
-        const imgProps = doc.getImageProperties(img);
-        const pdfWidth = doc.internal.pageSize.getWidth();
-        const pdfHeight = doc.internal.pageSize.getHeight();
-        const imgFullHeight = imgProps.height;
-        const nPages = Math.ceil(imgFullHeight / 1402);
+    //     document.body.appendChild(img);
+    //   })
+    //   .catch(function (error) {
+    //     console.error("oops, somehhhthing went wrong!", error);
+    //   });
 
-        const pageCanvas = document.createElement("canvas");
-        const pageCtx = pageCanvas.getContext("2d");
-        pageCanvas.width = imgProps.width;
-        pageCanvas.height = imgFullHeight;
+    // toPng(PDFContent)
+    //   .then((dataUrl) => {
+    //     const img = new Image();
+    //     img.src = dataUrl;
 
-        for (let page = 0; page < nPages; page++) {
-          // Display the page.
-          const w = pageCanvas.width;
-          const h = pageCanvas.height;
-          pageCtx.fillStyle = "white";
-          pageCtx.fillRect(0, 0, w, h);
-          pageCtx.drawImage(img, 0, page * 1402, w, h, 0, 0, w, h);
+    //     img.onload = () => {
+    //       const imgProps = doc.getImageProperties(img);
+    //       const pdfWidth = doc.internal.pageSize.getWidth();
+    //       const pdfHeight = doc.internal.pageSize.getHeight();
+    //       const nPages = Math.ceil(imgProps.height / pdfHeight);
 
-          // Add the page to the PDF.
-          if (page) doc.addPage();
+    //       const pageCanvas = document.createElement("canvas");
+    //       const pageCtx = pageCanvas.getContext("2d");
+    //       pageCanvas.width = pdfWidth;
+    //       pageCanvas.height = pdfHeight;
 
-          const imgData = pageCanvas.toDataURL(`image/PNG`, 1);
-          doc.addImage(imgData, 'PNG', 0, 0, 210, 297);
-        }
+    //       for (let page = 0; page < nPages; page++) {
+    //         // Display the page.
+    //         const w = pageCanvas.width;
+    //         const h = pageCanvas.height;
+    //         pageCtx.fillStyle = "white";
+    //         pageCtx.fillRect(0, 0, w, h);
+    //         pageCtx.drawImage(img, 0, page * pdfHeight, w, h, 0, 0, w, h);
 
-        //doc.addImage(img, "PNG", 0, 0, pdfWidth, pdfHeight);
-        doc.save("file.pdf");
-      };
-    });
+    //         // Add the page to the PDF.
+    //         if (page) doc.addPage();
+
+    //         const imgData = pageCanvas.toDataURL(`image/PNG`, 1);
+    //         doc.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+    //       }
+
+    //       //doc.addImage(img, "PNG", 0, 0, pdfWidth, pdfHeight);
+    //       doc.save("file.pdf");
+    //     };
+    //   })
+    //   .catch(function (error) {
+    //     console.error("oops, something went wrong!", error);
+    //   });
   }
-  $: console.log(PDFContent);
 </script>
 
 <div use:styleable={$component.styles}>
   <button on:click={createPDF}>{buttonText}</button>
-  <div bind:this={PDFContent} style="background-color:#FFF;width: 992px;">
+  <div bind:this={PDFContent} style="background-color:#FFF;width: 210mm;">
     <slot />
   </div>
 </div>
