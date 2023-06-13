@@ -6,6 +6,10 @@ Any ideas or comments to help me make progress are welcome.
 # Description
 Generate a PDF file from HTML content.
 
+![image](https://github.com/diogenesbrussels/budibase-pdfgenerator/assets/91942877/845b2e17-df4b-4114-97ce-0a78ca54b0ee)
+
+![image](https://github.com/diogenesbrussels/budibase-pdfgenerator/assets/91942877/b16811f8-2c63-4e77-b1e6-e6ff008e0899)
+
 Find out more about [Budibase](https://github.com/Budibase/budibase).
 
 ## Instructions
