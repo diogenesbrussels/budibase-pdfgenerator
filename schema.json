@@ -1,0 +1,25 @@
+{
+  "type": "component",
+  "metadata": {},
+  "schema": {
+    "name": "budibase-pdfgenerator",
+    "friendlyName": "PDF Generator",
+    "description": "Generate a PDF file from HTML template",
+    "icon": "Text",
+    "hasChildren": true,
+    "settings": [
+      {
+        "type": "text",
+        "key": "buttonText",
+        "label": "Button text",
+        "defaultValue": "Generate PDF"
+      },
+      {
+        "type": "text",
+        "key": "filename",
+        "label": "File name",
+        "defaultValue": "generated"
+      }
+    ]
+  }
+}

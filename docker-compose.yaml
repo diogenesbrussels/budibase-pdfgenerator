@@ -1,0 +1,25 @@
+version: "3"
+services:
+  budibase:
+    restart: unless-stopped
+    image: budibase/budibase:latest
+    ports:
+      - 10000:80
+    environment:
+      API_ENCRYPTION_KEY: yIgcjmmq7wAhO6ZVVlBOHh9mUZnDfKO0
+      JWT_SECRET: XVJrmLgOVhqnrrPU8F41Og8akICQqz8t
+      MINIO_ACCESS_KEY: IKex1aiaXgYrZRzBu5JWBZf5GFm6kEzk
+      MINIO_SECRET_KEY: uZ1Ofrw8JfOWUVZSEeff9ljAHHGVmxQy
+      REDIS_PASSWORD: d6aENLnEhwxfpGu98tMBzP7RlAqkm5Mp
+      INTERNAL_API_KEY: 7FkjpGoiIcCJyemtGr0m79qOtAfDoBFt
+      COUCHDB_USER: admin
+      COUCHDB_PASSWORD: QBZN5suqYXI7TX7QDkmQPPyWjlBv5Ttw
+      PLUGINS_DIR: /plugins
+      BB_ADMIN_USER_EMAIL: admin@admin.com
+      BB_ADMIN_USER_PASSWORD: admin
+    volumes:
+      - budibase_data:/data
+      - C:\Users\Olivier\Documents\GitHub\budibase-plugins\budibase-pdfgenerator:/plugins
+volumes:
+  budibase_data:
+    driver: local
