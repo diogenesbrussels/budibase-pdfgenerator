@@ -11,7 +11,14 @@
       {
         "type": "text",
         "key": "buttonText",
-        "label": "Button text"
+        "label": "Button text",
+        "defaultValue": "Generate PDF"
+      },
+      {
+        "type": "text",
+        "key": "filename",
+        "label": "File name",
+        "defaultValue": "generated"
       }
     ]
   }
